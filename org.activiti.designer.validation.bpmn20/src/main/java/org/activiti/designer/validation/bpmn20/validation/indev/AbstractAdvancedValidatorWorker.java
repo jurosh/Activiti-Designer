@@ -19,12 +19,27 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 public abstract class AbstractAdvancedValidatorWorker extends AbstractValidationWorker {
 
 	/**
+	 * Validate even rules forbidden by editor itself
+	 */
+	private final static boolean VALIDATE_ALL = true; 
+	
+	/**
+	 * Validate event forbidden by editor
+	 * @param element
+	 * @return
+	 */
+	public static boolean allowValidateForbiddenByEditor() {
+		return VALIDATE_ALL;
+	}
+	
+	
+	/**
 	 * Format name for output
 	 * 
 	 * @param element
 	 * @return
 	 */
-	protected static String formatName(BaseElement element) {
+	public static String formatName(BaseElement element) {
 		return element.getClass().getSimpleName() + " [" + element.getId() + "]";
 	}
 
@@ -35,7 +50,7 @@ public abstract class AbstractAdvancedValidatorWorker extends AbstractValidation
 	 * @param msg
 	 * @return
 	 */
-	protected void createErr(int severity, String msg, BaseElement elem) {
+	public void createErr(int severity, String msg, BaseElement elem) {
 		System.out.println("[ValidationError]" + msg);
 
 		// new (but temporary) result object
@@ -54,7 +69,7 @@ public abstract class AbstractAdvancedValidatorWorker extends AbstractValidation
 	 * 
 	 * @return
 	 */
-	protected BpmnModel getModel() {
+	public BpmnModel getModel() {
 		URI uri = EcoreUtil.getURI(diagram);
 		BpmnMemoryModel model = ModelHandler.getModel(uri);
 		return model.getBpmnModel();
