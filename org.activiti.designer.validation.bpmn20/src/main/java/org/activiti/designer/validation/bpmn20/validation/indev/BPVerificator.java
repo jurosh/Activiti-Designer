@@ -51,7 +51,7 @@ public class BPVerificator {
 		ProcessValidationWorker officialRulesValidationWorker = new OfficialRulesValidationWorker();
 		markers.addAll(officialRulesValidationWorker.validate(diagram, processNodes));
 
-		ProcessValidationWorker styleRulesValidationWorker = new StyleRulesValidationWoker();
+		ProcessValidationWorker styleRulesValidationWorker = new StyleRulesValidationWorker();
 		markers.addAll(styleRulesValidationWorker.validate(diagram, processNodes));
 
 		// results transformation, temporary
