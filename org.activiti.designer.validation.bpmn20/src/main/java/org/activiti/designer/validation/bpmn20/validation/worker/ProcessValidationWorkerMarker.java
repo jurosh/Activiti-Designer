@@ -1,6 +1,5 @@
 package org.activiti.designer.validation.bpmn20.validation.worker;
 
-import org.activiti.designer.eclipse.extension.validation.ValidationResults.ValidationResult;
 import org.activiti.designer.validation.bpmn20.validation.worker.impl.ValidationCode;
 
 /**
@@ -16,15 +15,7 @@ public class ProcessValidationWorkerMarker {
   private String message;
   private String nodeId;
   private ValidationCode code;
-  
-  // probably temporary solution to speed up development
-  private ValidationResult result;
 
-  public ProcessValidationWorkerMarker(ValidationResult result, final ValidationCode code) {
-	  this(result.getType(), result.getReason(), result.getElement().getId(), code);
-	  this.result = result;
-  }
-  
   public ProcessValidationWorkerMarker(final int severity, final String message, final String nodeId, final ValidationCode code) {
     super();
     this.severity = severity;
@@ -47,10 +38,6 @@ public class ProcessValidationWorkerMarker {
 
   public ValidationCode getCode() {
     return code;
-  }
-  
-  public ValidationResult getResult() {
-	return result;
   }
 
 }

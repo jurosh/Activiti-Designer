@@ -29,7 +29,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
 /**
@@ -44,15 +43,11 @@ import org.eclipse.ui.part.ViewPart;
  * 
  */
 public class ActivitiValidationView extends ViewPart {
-	public ActivitiValidationView() {
-	}
 
 	private Button validateButton;
 	private Button clearButton;
 	private Button configButton;
 	private Table table;
-	
-	private Text text;
 
 	private List<ValidationResult> data = new ArrayList<ValidationResults.ValidationResult>();
 	
@@ -71,26 +66,14 @@ public class ActivitiValidationView extends ViewPart {
 		indevLabel.setLayoutData(gridData2);
 
 		validateButton = new Button(parent, SWT.PUSH);
-		validateButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		validateButton.setText("Validate");
 
 		clearButton = new Button(parent, SWT.PUSH);
-		clearButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		clearButton.setText("Clear");
 
 		configButton = new Button(parent, SWT.PUSH);
-		configButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		configButton.setText("Configuration");
 
-		GridData gridData3 = new GridData(GridData.VERTICAL_ALIGN_END);
-	    gridData3.heightHint = 199;
-	    gridData3.horizontalAlignment = SWT.FILL;
-	    gridData3.horizontalSpan = 3;
-	    gridData3.widthHint = 176;
-	    gridData3.minimumHeight = 50;
-	    text = new Text(parent, SWT.BORDER | SWT.V_SCROLL);
-	    text.setLayoutData(gridData3);
-		
 		// define the TableViewer
 		TableViewer viewer = new TableViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 
@@ -112,7 +95,7 @@ public class ActivitiValidationView extends ViewPart {
 		table.setLayoutData(gridData);
 
 		resizeTable();
-	    
+		
 		bindActions();
 	}
 	
@@ -176,14 +159,8 @@ public class ActivitiValidationView extends ViewPart {
 		validateButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
+				super.mouseDown(e);
 				validate();
-			}
-		});
-		clearButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent e) {
-				textClear();
-				data.clear();
 			}
 		});
 	}
@@ -220,9 +197,8 @@ public class ActivitiValidationView extends ViewPart {
 			data.addAll(validateDiagram.getResults());
 			
 			System.out.println("Validation DONE!");
-			textClear();
 			for (ValidationResult result : data) {
-				textAppend(result.getReason());
+				System.out.println("result: " + result.getReason());
 			}
 			
 			refreshTable();
@@ -232,18 +208,6 @@ public class ActivitiValidationView extends ViewPart {
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
-	}
-	
-	private void textClear() {
-		text.setText("");
-	}
-
-	private void textAppend(String line) {
-		text.append(line + "\n");
-		/*
-		 * shell.open(); while (!shell.isDisposed()) { if
-		 * (!display.readAndDispatch()) display.sleep(); } display.dispose();
-		 */
 	}
 
 	@Deprecated

@@ -12,9 +12,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public enum ValidationCode {
 
-  VAL_001, VAL_002, VAL_003, VAL_004, VAL_005, VAL_006, 
-  
-  VAL_100;
+  VAL_001, VAL_002, VAL_003, VAL_004, VAL_005, VAL_006;
 
   private static final String REPLACE_UNDERSCORE = "_";
   private static final String REPLACEMENT_DASH = "-";

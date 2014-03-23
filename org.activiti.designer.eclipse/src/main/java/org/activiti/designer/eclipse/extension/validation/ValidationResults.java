@@ -38,15 +38,15 @@ public class ValidationResults {
 	 */
 	public static class ValidationResult {
 	
-		private int type;
+		private String type;
 		private String reason;
 		
 		private BaseElement element1;
 		private BaseElement element2;
 		private BaseElement[] elements;
 	
-		public ValidationResult(int severity, String reason, BaseElement... element) {
-			this.type = severity;
+		public ValidationResult(String type, String reason, BaseElement... element) {
+			this.type = type;
 			this.reason = reason;
 			this.elements = element;
 			this.element1 = element[0];
@@ -59,7 +59,7 @@ public class ValidationResults {
 			return type + " " + reason;
 		}
 	
-		public int getType() {
+		public String getType() {
 			return type;
 		}
 	
