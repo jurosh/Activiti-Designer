@@ -2,10 +2,8 @@ package org.activiti.designer.property;
 
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.designer.util.TextUtil;
-import org.activiti.designer.util.eclipse.ActivitiUiUtil;
 import org.apache.commons.lang.math.NumberUtils;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
 import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
 import org.eclipse.swt.widgets.Control;
@@ -55,19 +53,9 @@ public class PropertySequenceFlowSection extends ActivitiPropertySection impleme
           final String widthText = flowLabelWidthText.getText();
           
           if (NumberUtils.isNumber(widthText)) {
-            final long width = Long.valueOf(widthText);
+            long width = Long.valueOf(widthText);
             if (width >= 50 || width <= 500) {
-              
-              final Runnable runnable = new Runnable() {
-
-                public void run() {
-
-                  TextUtil.setTextSize((int) width, text);
-                }
-              };
-              
-              TransactionalEditingDomain editingDomain = getDiagramContainer().getDiagramBehavior().getEditingDomain();
-              ActivitiUiUtil.runModelChange(runnable, editingDomain, "Model Update");
+              TextUtil.setTextSize((int) width, text);
             }
           }
         }

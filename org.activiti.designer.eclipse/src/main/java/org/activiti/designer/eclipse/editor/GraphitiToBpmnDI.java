@@ -174,15 +174,9 @@ public class GraphitiToBpmnDI {
     for (ConnectionDecorator decorator : decoratorList) {
       if (decorator.getGraphicsAlgorithm() instanceof org.eclipse.graphiti.mm.algorithms.MultiText) {
         org.eclipse.graphiti.mm.algorithms.MultiText text = (org.eclipse.graphiti.mm.algorithms.MultiText) decorator.getGraphicsAlgorithm();
-        if (text.getHeight() > 0) {
-          double startX = 0;
-          double startY = 0;
-          if (flowGraphicsList != null && flowGraphicsList.size() > 0) {
-            startX = flowGraphicsList.get(0).getX();
-            startY = flowGraphicsList.get(0).getY();
-          }
+        if(text.getHeight() > 0) {
           model.getBpmnModel().addLabelGraphicInfo(sequenceFlow.getId(), createGraphicInfo(
-                  (int) startX + text.getX(), (int) startY + text.getY(), text.getWidth(), text.getHeight()));
+                  text.getX(), text.getY(), text.getWidth(), text.getHeight()));
           break;
         }
       }
