@@ -151,7 +151,7 @@
     </category>
     <view
           category="org.activiti.designer.eclipse.view"
-          class="org.activiti.designer.eclipse.views.validator.ActivitiValidationView"
+          class="org.activiti.designer.eclipse.views.validator.ValidationView"
           icon="icons/logo/activiti.logo.gradients.16x16.png"
           id="org.activiti.designer.eclipse.jurosh.validator"
           name="BPMN 2.0 Verificator"

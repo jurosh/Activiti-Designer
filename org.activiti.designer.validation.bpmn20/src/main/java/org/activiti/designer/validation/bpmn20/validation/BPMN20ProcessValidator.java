@@ -16,7 +16,7 @@ import org.activiti.designer.util.ActivitiConstants;
 import org.activiti.designer.validation.bpmn20.bundle.PluginConstants;
 import org.activiti.designer.validation.bpmn20.validation.indev.BPVerificator;
 import org.activiti.designer.validation.bpmn20.validation.indev.OfficialRulesValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.indev.StyleRulesValidationWoker;
+import org.activiti.designer.validation.bpmn20.validation.indev.StyleRulesValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerInfo;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerMarker;
 import org.activiti.designer.validation.bpmn20.validation.worker.impl.ScriptTaskValidationWorker;
@@ -141,7 +141,7 @@ public class BPMN20ProcessValidator extends AbstractProcessValidator {
     result.add(new ProcessValidationWorkerInfo(new SubProcessValidationWorker(), PluginConstants.WORK_SUB_PROCESS));
     
     result.add(new ProcessValidationWorkerInfo(new OfficialRulesValidationWorker(), PluginConstants.WORK_SUB_PROCESS));
-    result.add(new ProcessValidationWorkerInfo(new StyleRulesValidationWoker(), PluginConstants.WORK_SUB_PROCESS));
+    result.add(new ProcessValidationWorkerInfo(new StyleRulesValidationWorker(), PluginConstants.WORK_SUB_PROCESS));
 
     return result;
 

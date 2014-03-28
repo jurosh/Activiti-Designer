@@ -11,7 +11,7 @@ import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidati
 /**
  * Official BPMN rules validation
  * 
- * @author Jurosh
+ * @author Juraj Husar (jurosh@jurosh.com)
  * 
  */
 public class OfficialRulesValidationWorker extends AbstractValidationWorker {

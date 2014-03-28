@@ -2,6 +2,7 @@ package org.activiti.designer.validation.bpmn20.validation.indev;
 
 import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.designer.eclipse.Logger;
 import org.activiti.designer.eclipse.extension.validation.ValidationResults.ValidationResult;
 import org.activiti.designer.util.editor.BpmnMemoryModel;
 import org.activiti.designer.util.editor.ModelHandler;
@@ -13,7 +14,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * 
- * @author Jurosh
+ * @author Juraj Husar (jurosh@jurosh.com)
  * 
  */
 public abstract class AbstractAdvancedValidatorWorker extends AbstractValidationWorker {
@@ -51,7 +52,7 @@ public abstract class AbstractAdvancedValidatorWorker extends AbstractValidation
 	 * @return
 	 */
 	public void createErr(int severity, String msg, BaseElement elem) {
-		System.out.println("[ValidationError]" + msg);
+		Logger.logDebug("[ValidationError]" + msg);
 
 		// new (but temporary) result object
 		ValidationResult validationResult = new ValidationResult(severity, msg, elem);
