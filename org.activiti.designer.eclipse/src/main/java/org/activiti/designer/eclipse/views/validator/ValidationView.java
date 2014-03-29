@@ -1,5 +1,6 @@
 package org.activiti.designer.eclipse.views.validator;
 
+import org.activiti.designer.eclipse.Logger;
 import org.activiti.designer.eclipse.views.validator.config.ValidationConfigurationDialog;
 import org.activiti.designer.eclipse.views.validator.table.ValidationTableManager;
 import org.activiti.designer.eclipse.views.validator.table.ValidationTableViewer;
@@ -68,7 +69,7 @@ public class ValidationView extends ViewPart {
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-
+		
 		testButton = new Button(parent, SWT.PUSH);
 		testButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		testButton.setText("Test Result Data");
@@ -101,9 +102,8 @@ public class ValidationView extends ViewPart {
 		testButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseDown(MouseEvent e) {
-			
-				ValidationUtils.selectShapeByElementId("e");
-				
+				// nothing to test
+				Logger.logInfo("No test action.");
 			}
 		});
 	}
