@@ -1,6 +1,7 @@
 package org.activiti.designer.eclipse.views.validator.config;
 
 import org.activiti.designer.eclipse.Logger;
+import org.activiti.designer.eclipse.common.ActivitiPlugin;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
@@ -11,8 +12,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 /**
@@ -24,13 +23,9 @@ import org.eclipse.wb.swt.SWTResourceManager;
 public class ValidationConfigurationDialog extends Dialog {
 
 	public ValidationConfigurationDialog() {
-		super(getCurrentShell());
+		super(ActivitiPlugin.getShell());
 	}
 
-	static private Shell getCurrentShell() {
-		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
-	}
-	
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite container = (Composite) super.createDialogArea(parent);

@@ -129,4 +129,10 @@ public interface ISampleImageConstants {
 	 * The Constant IMG_OUTLINE_THUMBNAIL.
 	 */
 	static final String IMG_OUTLINE_THUMBNAIL = PRE + "outline.thumbnail"; //$NON-NLS-1$
+	
+	// validation
+	static final String IMG_VALIDATION_ERROR = PRE + "validation.sign.error";
+	static final String IMG_VALIDATION_WARN = PRE + "validation.sign.warn";
+	static final String IMG_VALIDATION_INFO = PRE + "validation.sign.info";
+	static final String IMG_VALIDATION_IMPR = PRE + "validation.sign.improvement";
 }

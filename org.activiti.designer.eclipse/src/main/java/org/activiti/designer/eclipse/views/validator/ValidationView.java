@@ -1,14 +1,8 @@
 package org.activiti.designer.eclipse.views.validator;
 
-import org.activiti.designer.eclipse.Logger;
-import org.activiti.designer.eclipse.editor.ActivitiDiagramEditor;
-import org.activiti.designer.eclipse.extension.validation.ProcessValidator;
-import org.activiti.designer.eclipse.extension.validation.ValidationResults;
-import org.activiti.designer.eclipse.util.ExtensionPointUtil;
 import org.activiti.designer.eclipse.views.validator.config.ValidationConfigurationDialog;
 import org.activiti.designer.eclipse.views.validator.table.ValidationTableManager;
 import org.activiti.designer.eclipse.views.validator.table.ValidationTableViewer;
-import org.activiti.designer.util.ActivitiConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
@@ -28,14 +22,15 @@ import org.eclipse.ui.part.ViewPart;
  * 
  */
 public class ValidationView extends ViewPart {
-	public ValidationView() {
-	}
 
 	private ValidationTableManager tableManager;
-	
+
 	private Button validateButton;
 	private Button clearButton;
 	private Button configButton;
+
+	private Button testButton;
+
 	private Table table;
 
 	@Override
@@ -74,6 +69,10 @@ public class ValidationView extends ViewPart {
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
 
+		testButton = new Button(parent, SWT.PUSH);
+		testButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
+		testButton.setText("Test Result Data");
+
 		resizeTable();
 	}
 
@@ -99,34 +98,21 @@ public class ValidationView extends ViewPart {
 				new ValidationConfigurationDialog().open();
 			}
 		});
+		testButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+			
+				ValidationUtils.selectShapeByElementId("e");
+				
+			}
+		});
 	}
 
 	/**
 	 * Validate active diagram
 	 */
-	protected void validate() {
-		Logger.logInfo("Running validation!");
-
-		// inspired by AbstractExportMarshaller.invokeValidators
-		// final int totalWork = WORK_INVOKE_VALIDATORS_VALIDATOR * validatorIds.size();
-		// final IProgressMonitor activeMonitor = monitor == null ? new NullProgressMonitor() : monitor;
-		// activeMonitor.beginTask("Invoking validators", totalWork);
-		// boolean overallResult = true;
-
-		// get validator, otherwise skip
-		final ProcessValidator processValidator = ExtensionPointUtil.getProcessValidator(ActivitiConstants.BPMN_VALIDATOR_ID);
-		if (processValidator != null) {
-			
-			Logger.logDebug("Validator resolved");
-			
-			// TODO find better way of getting active diagram
-			ValidationResults validateDiagram = processValidator.validateDiagram(ActivitiDiagramEditor.EDITOR.getDiagramTypeProvider().getDiagram());
-				
-			// update table
-			tableManager.setAll(validateDiagram.getResults());
-			
-			Logger.logInfo("Validation Finished!");
-		}
+	private void validate() {
+		tableManager.setAll(ValidationUtils.validate());
 	}
 
 	/**
@@ -137,7 +123,7 @@ public class ValidationView extends ViewPart {
 			tableColumn.pack();
 		}
 	}
-	
+
 	@Override
 	public void setFocus() {
 		// empty

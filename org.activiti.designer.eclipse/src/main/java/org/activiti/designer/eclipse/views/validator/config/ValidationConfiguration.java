@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Configuration
  * 
- * @author Jurosh
+ * @author Juraj Husar (jurosh@jurosh.com)
  *
  */
 public class ValidationConfiguration implements Serializable {
