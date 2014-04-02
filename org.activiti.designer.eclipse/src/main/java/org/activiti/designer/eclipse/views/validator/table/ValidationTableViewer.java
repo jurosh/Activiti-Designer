@@ -90,7 +90,7 @@ public class ValidationTableViewer extends TableViewer implements ValidationTabl
 		if (property == PROP_TYPE) {
 			viewerColumn.setLabelProvider(new ColumnLabelTypeProvider());
 		} else {
-			viewerColumn.setLabelProvider(new ColumnLabelDefaultTypeProvider(property));
+			viewerColumn.setLabelProvider(new ColumnLabelDefaultProvider(property));
 		}
 
 		return viewerColumn;
@@ -177,11 +177,11 @@ public class ValidationTableViewer extends TableViewer implements ValidationTabl
 	 * @author Juraj Husar (jurosh@jurosh.com)
 	 *
 	 */
-	private class ColumnLabelDefaultTypeProvider extends ColumnLabelProvider {
+	private class ColumnLabelDefaultProvider extends ColumnLabelProvider {
 
 		private int property;
 
-		public ColumnLabelDefaultTypeProvider(int property) {
+		public ColumnLabelDefaultProvider(int property) {
 			this.property = property;
 		}
 

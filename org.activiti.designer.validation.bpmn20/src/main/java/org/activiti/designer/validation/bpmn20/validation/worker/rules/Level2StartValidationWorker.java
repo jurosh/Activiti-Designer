@@ -1,6 +1,6 @@
-package org.activiti.designer.validation.bpmn20.validation.indev.rules;
+package org.activiti.designer.validation.bpmn20.validation.worker.rules;
 
-import org.activiti.designer.validation.bpmn20.validation.indev.AbstractAdvancedValidatorWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.AbstractAdvancedValidatorWorker;
 
 /**
  * Start Event Rules

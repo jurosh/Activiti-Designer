@@ -87,6 +87,9 @@ public class ValidationUtils {
 
 	/**
 	 * Find shape in diagram by ID
+	 * 
+	 * TODO cant find start message event
+	 * 
 	 * @param id
 	 * @param diagram
 	 * @return return shape object or <i>null</i> if not found

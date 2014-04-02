@@ -1,4 +1,4 @@
-package org.activiti.designer.validation.bpmn20.validation.indev;
+package org.activiti.designer.validation.bpmn20.validation.worker;
 
 import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.BpmnModel;
@@ -6,8 +6,6 @@ import org.activiti.designer.eclipse.Logger;
 import org.activiti.designer.eclipse.extension.validation.ValidationResults.ValidationResult;
 import org.activiti.designer.util.editor.BpmnMemoryModel;
 import org.activiti.designer.util.editor.ModelHandler;
-import org.activiti.designer.validation.bpmn20.validation.worker.AbstractValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerMarker;
 import org.activiti.designer.validation.bpmn20.validation.worker.impl.ValidationCode;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;

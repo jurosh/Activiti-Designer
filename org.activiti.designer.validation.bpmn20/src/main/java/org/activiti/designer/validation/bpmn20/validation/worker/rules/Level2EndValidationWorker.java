@@ -1,10 +1,10 @@
-package org.activiti.designer.validation.bpmn20.validation.indev.rules;
+package org.activiti.designer.validation.bpmn20.validation.worker.rules;
 
 import java.util.List;
 
 import org.activiti.bpmn.model.EndEvent;
 import org.activiti.bpmn.model.SequenceFlow;
-import org.activiti.designer.validation.bpmn20.validation.indev.AbstractAdvancedValidatorWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.AbstractAdvancedValidatorWorker;
 import org.eclipse.core.resources.IMarker;
 
 /**

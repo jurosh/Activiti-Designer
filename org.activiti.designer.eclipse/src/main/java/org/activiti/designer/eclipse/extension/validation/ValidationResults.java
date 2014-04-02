@@ -13,13 +13,6 @@ import org.activiti.bpmn.model.BaseElement;
  */
 public class ValidationResults {
 	
-	// TODO use just numbers, no need to store string
-	public static final String TYPE_INFO = "Information";
-	public static final String TYPE_ERROR = "Error";
-	public static final String TYPE_WARNING = "Warning";
-	
-	// TODO create levels
-
 	private List<ValidationResult> results = new ArrayList<ValidationResult>();
 	
 	public void add(ValidationResult result) {
@@ -43,15 +36,14 @@ public class ValidationResults {
 		
 		private BaseElement element1;
 		private BaseElement element2;
-		private BaseElement[] elements;
 	
 		public ValidationResult(int severity, String reason, BaseElement... element) {
 			this.type = severity;
 			this.reason = reason;
-			this.elements = element;
 			this.element1 = element[0];
-//			this.element2 = element[1];
-			// TODO use all elements
+			if(element.length > 1) {
+				this.element2 = element[1];
+			}
 		}
 	
 		@Override

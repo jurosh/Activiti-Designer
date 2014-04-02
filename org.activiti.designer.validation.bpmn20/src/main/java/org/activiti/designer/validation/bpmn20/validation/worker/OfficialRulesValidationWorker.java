@@ -1,12 +1,10 @@
-package org.activiti.designer.validation.bpmn20.validation.indev;
+package org.activiti.designer.validation.bpmn20.validation.worker;
 
-import org.activiti.designer.validation.bpmn20.validation.indev.rules.Level1ValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.indev.rules.Level2EndValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.indev.rules.Level2MessageFlowValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.indev.rules.Level2SequenceFlowValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.indev.rules.Level2StartValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.worker.AbstractValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level1ValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2EndValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2MessageFlowValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2SequenceFlowValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2StartValidationWorker;
 
 /**
  * Official BPMN rules validation

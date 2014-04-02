@@ -1,4 +1,4 @@
-package org.activiti.designer.validation.bpmn20.validation.indev;
+package org.activiti.designer.validation.bpmn20.validation.helper;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,8 +12,10 @@ import org.activiti.bpmn.model.Pool;
 import org.activiti.designer.eclipse.extension.validation.ValidationResults;
 import org.activiti.designer.util.editor.BpmnMemoryModel;
 import org.activiti.designer.util.editor.ModelHandler;
+import org.activiti.designer.validation.bpmn20.validation.worker.OfficialRulesValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerMarker;
+import org.activiti.designer.validation.bpmn20.validation.worker.StyleRulesValidationWorker;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.graphiti.mm.pictograms.Diagram;

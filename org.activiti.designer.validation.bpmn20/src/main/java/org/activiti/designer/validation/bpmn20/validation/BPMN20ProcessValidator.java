@@ -14,11 +14,11 @@ import org.activiti.designer.eclipse.extension.validation.AbstractProcessValidat
 import org.activiti.designer.eclipse.extension.validation.ValidationResults;
 import org.activiti.designer.util.ActivitiConstants;
 import org.activiti.designer.validation.bpmn20.bundle.PluginConstants;
-import org.activiti.designer.validation.bpmn20.validation.indev.BPVerificator;
-import org.activiti.designer.validation.bpmn20.validation.indev.OfficialRulesValidationWorker;
-import org.activiti.designer.validation.bpmn20.validation.indev.StyleRulesValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.helper.BPVerificator;
+import org.activiti.designer.validation.bpmn20.validation.worker.OfficialRulesValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerInfo;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerMarker;
+import org.activiti.designer.validation.bpmn20.validation.worker.StyleRulesValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.impl.ScriptTaskValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.impl.SequenceFlowValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.impl.ServiceTaskValidationWorker;
@@ -153,7 +153,7 @@ public class BPMN20ProcessValidator extends AbstractProcessValidator {
     overallResult = false;
   }
   
-  // TODO remove after landing verification via workers
+  // TODO remove after landing verification via validateDiagram(Diagram diagram, IProgressMonitor monitor) method
   @Override
   @Deprecated
   public ValidationResults validateDiagram(Diagram diagram) {
