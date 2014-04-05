@@ -2,10 +2,13 @@ package org.activiti.designer.validation.bpmn20.validation.worker.rules;
 
 import java.util.List;
 
+import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.BoundaryEvent;
 import org.activiti.bpmn.model.EndEvent;
+import org.activiti.bpmn.model.EventDefinition;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.FlowNode;
+import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.bpmn.model.StartEvent;
@@ -25,8 +28,40 @@ public class Level1ValidationWorker extends AbstractAdvancedValidatorWorker {
 
 		/**
 		 * [O1-1] A sequence flow may not cross a pool (process) boundary.
-		 */
-		// TODO
+		 */		
+		List<SequenceFlow> allSequenceFlows = getNodes(SequenceFlow.class);
+		for (SequenceFlow sequenceFlow : allSequenceFlows) {
+			String targetRef = sequenceFlow.getTargetRef();
+			String sourceRef = sequenceFlow.getSourceRef();
+			
+			BaseElement target = getNode(targetRef);
+			BaseElement source = getNode(sourceRef);
+			
+			// if its not message start flow
+			if(source instanceof StartEvent) {
+				List<EventDefinition> eventDefinitions = ((StartEvent) source).getEventDefinitions();
+				boolean isOk = false;
+				for (EventDefinition eventDefinition : eventDefinitions) {
+					if(eventDefinition instanceof MessageEventDefinition) {
+						System.out.println("[debug] Message event, OK");
+						isOk = true;
+					}
+				}
+				if(!isOk) {
+					createErr(IMarker.SEVERITY_ERROR, formatName(source, sourceRef) + " should be connected to " + formatName(target, targetRef) + " only with message flow.", source);
+				}
+				
+			} else {
+			
+				String processOfTarget = getIdOfProcess(target);
+				String processOfSource = getIdOfProcess(source);
+				
+				if(processOfTarget != processOfSource) {
+					createErr(IMarker.SEVERITY_ERROR, formatName(source, sourceRef) + " should be connected to " + formatName(target, targetRef) + " only with message flow.", source);
+					System.out.println("PRUSER - " + sourceRef + " | " + targetRef);
+				}
+			}
+		}
 
 		/**
 		 * [O1-2] A sequence flow may not cross a subprocess boundary.

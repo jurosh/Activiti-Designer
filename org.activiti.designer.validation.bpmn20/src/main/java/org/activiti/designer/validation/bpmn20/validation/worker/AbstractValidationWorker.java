@@ -2,6 +2,7 @@ package org.activiti.designer.validation.bpmn20.validation.worker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +23,14 @@ public abstract class AbstractValidationWorker implements ProcessValidationWorke
 	protected Diagram diagram;
 	
 	/**
-	 * Active set of nodes
+	 * Active set of nodes indexed by classes types
 	 */
 	protected Map<String, List<Object>> nodes;
+	
+	/**
+	 * Active set of nodes indexed by its IDs
+	 */
+	protected Map<String, BaseElement> nodesIndexById = new HashMap<String, BaseElement>();
 	
 	/**
 	 * Results
@@ -46,6 +52,15 @@ public abstract class AbstractValidationWorker implements ProcessValidationWorke
 		this.diagram = diagram;
 		this.nodes = processNodes;
 		
+		for ( List<Object>  nodesList: processNodes.values()) {
+			for (Object object : nodesList) {
+				if(object instanceof BaseElement) {
+					BaseElement baseElement =	(BaseElement) object;
+					nodesIndexById.put(baseElement.getId().toString(), baseElement);
+				}
+			}
+		}
+		
 		// call validate function
 		validate();
 		
@@ -62,5 +77,14 @@ public abstract class AbstractValidationWorker implements ProcessValidationWorke
 		List<? extends Object> listing = nodes.get(clas.getCanonicalName());
 		return listing == null ? new ArrayList<T>() : (List<T>) listing;
 	}
-
+	
+	/**
+	 * Get node by its ID
+	 * @param id
+	 * @return
+	 */
+	public BaseElement getNode(String id) {
+		return nodesIndexById.get(id);
+	}
+	
 }

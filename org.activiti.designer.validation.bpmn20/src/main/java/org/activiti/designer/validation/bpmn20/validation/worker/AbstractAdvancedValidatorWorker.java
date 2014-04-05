@@ -1,7 +1,10 @@
 package org.activiti.designer.validation.bpmn20.validation.worker;
 
+import java.util.List;
+
 import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.BpmnModel;
+import org.activiti.bpmn.model.Process;
 import org.activiti.designer.eclipse.Logger;
 import org.activiti.designer.eclipse.extension.validation.ValidationResults.ValidationResult;
 import org.activiti.designer.util.editor.BpmnMemoryModel;
@@ -39,7 +42,11 @@ public abstract class AbstractAdvancedValidatorWorker extends AbstractValidation
 	 * @return
 	 */
 	public static String formatName(BaseElement element) {
-		return element.getClass().getSimpleName() + " [" + element.getId() + "]";
+		return formatName(element, null);
+	}
+	
+	public static String formatName(BaseElement element, String id) {
+		return element == null ? id : element.getClass().getSimpleName() + " [" + element.getId() + "]";
 	}
 
 	/**
@@ -73,5 +80,21 @@ public abstract class AbstractAdvancedValidatorWorker extends AbstractValidation
 		BpmnMemoryModel model = ModelHandler.getModel(uri);
 		return model.getBpmnModel();
 	}
-
+	
+	/**
+	 * Get Containing pool/process of element defined by param 
+	 * @param element
+	 * @return
+	 */
+	public String getIdOfProcess(BaseElement element) {
+		if (element != null) {
+			List<Process> processes = getModel().getProcesses();
+			for (Process process : processes) {
+				if (process.getFlowElement(element.getId()) != null) {
+					return process.getId();
+				}
+			}
+		}
+		return null;
+	}
 }

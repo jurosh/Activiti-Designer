@@ -1,5 +1,7 @@
-package org.activiti.designer.validation.bpmn20.validation.worker;
+package org.activiti.designer.validation.bpmn20.validation.worker.inc;
 
+import org.activiti.designer.validation.bpmn20.validation.worker.AbstractValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level1ValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2EndValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2MessageFlowValidationWorker;

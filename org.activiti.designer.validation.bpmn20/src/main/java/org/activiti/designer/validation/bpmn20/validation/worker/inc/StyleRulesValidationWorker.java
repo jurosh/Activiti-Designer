@@ -1,4 +1,6 @@
-package org.activiti.designer.validation.bpmn20.validation.worker;
+package org.activiti.designer.validation.bpmn20.validation.worker.inc;
+
+import org.activiti.designer.validation.bpmn20.validation.worker.AbstractValidationWorker;
 
 
 /**
