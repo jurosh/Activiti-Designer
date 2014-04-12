@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.activiti.bpmn.model.SequenceFlow;
+import org.activiti.designer.validation.bpmn20.validation.ValidationCode;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerMarker;
 import org.apache.commons.lang.StringUtils;

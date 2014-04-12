@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.activiti.bpmn.model.FlowElement;
+import org.activiti.bpmn.model.Process;
 import org.activiti.designer.eclipse.extension.validation.AbstractProcessValidator;
 import org.activiti.designer.eclipse.extension.validation.ValidationResults;
 import org.activiti.designer.util.ActivitiConstants;
@@ -40,12 +41,6 @@ public class BPMN20ProcessValidator extends AbstractProcessValidator {
   private static final int EXTRACTION_WORK_UNIT = 10;
 
   private boolean overallResult;
-
-  /**
-	 * 
-	 */
-  public BPMN20ProcessValidator() {
-  }
 
   @Override
   public String getValidatorId() {
@@ -102,34 +97,42 @@ public class BPMN20ProcessValidator extends AbstractProcessValidator {
     return overallResult;
   }
 
+  /**
+   * Extract process constructs, elements, flows
+   * @param monitor
+   * @return
+   */
   private Map<String, List<Object>> extractProcessConstructs(final IProgressMonitor monitor) {
-
-    Collection<FlowElement> flowElements = getDiagramWorkerContext().getBpmnModel().getBpmnModel().getMainProcess().getFlowElements();
-    monitor.beginTask("Analyzing process constructs", flowElements.size() * EXTRACTION_WORK_UNIT);
-
-    final Map<String, List<Object>> result = new HashMap<String, List<Object>>();
-
-    for (final FlowElement object : flowElements) {
-
-      String nodeType = null;
-
-      nodeType = object.getClass().getCanonicalName();
-
-      if (nodeType != null) {
-        if (!result.containsKey(nodeType)) {
-          result.put(nodeType, new ArrayList<Object>());
+    final Map<String, List<Object>> resultNodes = new HashMap<String, List<Object>>();
+    // iterate processes
+    List<Process> processes = getDiagramWorkerContext().getBpmnModel().getBpmnModel().getProcesses();
+    for (Process process : processes) {
+      
+      // get iterated process constructs
+      Collection<FlowElement> flowElements = process.getFlowElements();
+      monitor.beginTask("Analyzing process constructs of process " + process.getId(), flowElements.size() * EXTRACTION_WORK_UNIT);
+      for (final FlowElement object : flowElements) {
+        
+        String nodeType = object.getClass().getCanonicalName();
+        if (nodeType != null) {
+          
+          if (!resultNodes.containsKey(nodeType)) {
+            resultNodes.put(nodeType, new ArrayList<Object>());
+          }
+          resultNodes.get(nodeType).add(object);
         }
-        result.get(nodeType).add(object);
+        monitor.worked(EXTRACTION_WORK_UNIT);
       }
 
-      monitor.worked(EXTRACTION_WORK_UNIT);
+      monitor.done();
     }
-
-    monitor.done();
-
-    return result;
+    return resultNodes;
   }
   
+  /**
+   * Get workers
+   * @return
+   */
   private List<ProcessValidationWorkerInfo> getWorkers() {
 
     List<ProcessValidationWorkerInfo> result = new ArrayList<ProcessValidationWorkerInfo>();

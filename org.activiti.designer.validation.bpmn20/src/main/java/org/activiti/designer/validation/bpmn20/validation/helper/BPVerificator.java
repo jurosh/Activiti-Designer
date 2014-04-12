@@ -8,7 +8,7 @@ import java.util.Map;
 
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.FlowElement;
-import org.activiti.bpmn.model.Pool;
+import org.activiti.bpmn.model.Process;
 import org.activiti.designer.eclipse.extension.validation.ValidationResults;
 import org.activiti.designer.util.editor.BpmnMemoryModel;
 import org.activiti.designer.util.editor.ModelHandler;
@@ -64,27 +64,32 @@ public class BPVerificator {
 		return results;
 	}
 
-	@SuppressWarnings("unchecked")
-	private Map<String, List<Object>> extractProcessConstructs(final BpmnModel model) {
-		Collection<FlowElement> flowElements = model.getMainProcess().getFlowElements();
-		final Map<String, List<Object>> result = new HashMap<String, List<Object>>();
-
-		// new code
-		List<? extends Object> pools = model.getPools();
-		result.put(Pool.class.getCanonicalName(), (List<Object>) pools);
-
-		// old code
-		for (final FlowElement object : flowElements) {
-			String nodeType = null;
-			nodeType = object.getClass().getCanonicalName();
-			if (nodeType != null) {
-				if (!result.containsKey(nodeType)) {
-					result.put(nodeType, new ArrayList<Object>());
-				}
-				result.get(nodeType).add(object);
-			}
-
-		}
-		return result;
-	}
+	/**
+   * Extract process constructs, elements, flows
+   * @param monitor
+   * @return
+   */
+  private Map<String, List<Object>> extractProcessConstructs(final BpmnModel model) {
+    final Map<String, List<Object>> resultNodes = new HashMap<String, List<Object>>();
+    // iterate processes
+    List<Process> processes = model.getProcesses();
+    for (Process process : processes) {
+      
+      // get iterated process constructs
+      Collection<FlowElement> flowElements = process.getFlowElements();
+      for (final FlowElement object : flowElements) {
+        
+        String nodeType = object.getClass().getCanonicalName();
+        if (nodeType != null) {
+          
+          if (!resultNodes.containsKey(nodeType)) {
+            resultNodes.put(nodeType, new ArrayList<Object>());
+          }
+          resultNodes.get(nodeType).add(object);
+        }
+      }
+    }
+    return resultNodes;
+  }
+  
 }

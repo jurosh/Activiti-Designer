@@ -1,7 +1,7 @@
 package org.activiti.designer.validation.bpmn20.validation.worker;
 
 import org.activiti.designer.eclipse.extension.validation.ValidationResults.ValidationResult;
-import org.activiti.designer.validation.bpmn20.validation.worker.impl.ValidationCode;
+import org.activiti.designer.validation.bpmn20.validation.ValidationCode;
 
 /**
  * Container object for markers created by {@link ProcessValidationWorker}s.

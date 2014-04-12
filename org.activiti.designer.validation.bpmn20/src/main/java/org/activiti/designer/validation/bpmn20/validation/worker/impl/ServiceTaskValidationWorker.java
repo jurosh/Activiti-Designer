@@ -9,6 +9,7 @@ import java.util.Map;
 import org.activiti.bpmn.model.FlowElement;
 import org.activiti.bpmn.model.ServiceTask;
 import org.activiti.bpmn.model.SubProcess;
+import org.activiti.designer.validation.bpmn20.validation.ValidationCode;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorkerMarker;
 import org.eclipse.graphiti.mm.pictograms.Diagram;

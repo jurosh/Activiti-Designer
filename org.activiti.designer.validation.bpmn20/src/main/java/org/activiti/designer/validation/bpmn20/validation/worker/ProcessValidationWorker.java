@@ -16,6 +16,9 @@ import org.eclipse.graphiti.mm.pictograms.Diagram;
  */
 public interface ProcessValidationWorker {
 
+  // void set(Diagram diagram, BpmnModel Model, Map<String, List<Object>> processNodes, Map<String, BaseElement> nodesIndexById);
+  // Collection<ProcessValidationWorkerMarker> validate();
+  
   Collection<ProcessValidationWorkerMarker> validate(Diagram diagram, Map<String, List<Object>> processNodes);
-
+  
 }

@@ -16,35 +16,34 @@ import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2Sta
  */
 public class OfficialRulesValidationWorker extends AbstractValidationWorker {
 
-	@Override
-	public void validate() {
+  @Override
+  public void validate() {
 
-		// run all sub-validator workers
-		
-		// BPMN 2.0 Level 1 [O]   
-		ProcessValidationWorker level1ValidationRulesWorker = new Level1ValidationWorker();
-		results.addAll(level1ValidationRulesWorker.validate(diagram, nodes));
-		
-		// BPMN 2.0 Level 2
-		// sequence flow [S]
-		ProcessValidationWorker seqFlowWorker = new Level2SequenceFlowValidationWorker();
-		results.addAll(seqFlowWorker.validate(diagram, nodes));
-		
-		// message flow [M]
-		ProcessValidationWorker messageFlowWorker = new Level2MessageFlowValidationWorker();
-		results.addAll(messageFlowWorker.validate(diagram, nodes));
-		
-		// start element [s]
-		ProcessValidationWorker startElementWorker = new Level2StartValidationWorker();
-		results.addAll(startElementWorker.validate(diagram, nodes));
-		
-		// end element [e]
-		ProcessValidationWorker endElementWorker = new Level2EndValidationWorker();
-		results.addAll(endElementWorker.validate(diagram, nodes));
-		
-		// TODO
-		
-	}
+    // run all sub-validator workers
 
+    // BPMN 2.0 Level 1 [O]
+    ProcessValidationWorker level1ValidationRulesWorker = new Level1ValidationWorker();
+    results.addAll(level1ValidationRulesWorker.validate(diagram, nodes));
+
+    // BPMN 2.0 Level 2
+    // sequence flow [S]
+    ProcessValidationWorker seqFlowWorker = new Level2SequenceFlowValidationWorker();
+    results.addAll(seqFlowWorker.validate(diagram, nodes));
+
+    // message flow [M]
+    ProcessValidationWorker messageFlowWorker = new Level2MessageFlowValidationWorker();
+    results.addAll(messageFlowWorker.validate(diagram, nodes));
+
+    // start element [s]
+    ProcessValidationWorker startElementWorker = new Level2StartValidationWorker();
+    results.addAll(startElementWorker.validate(diagram, nodes));
+
+    // end element [e]
+    ProcessValidationWorker endElementWorker = new Level2EndValidationWorker();
+    results.addAll(endElementWorker.validate(diagram, nodes));
+
+    // TODO
+
+  }
 
 }

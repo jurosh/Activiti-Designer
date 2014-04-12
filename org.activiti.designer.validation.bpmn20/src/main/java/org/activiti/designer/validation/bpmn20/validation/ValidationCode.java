@@ -1,4 +1,4 @@
-package org.activiti.designer.validation.bpmn20.validation.worker.impl;
+package org.activiti.designer.validation.bpmn20.validation;
 
 import org.apache.commons.lang.StringUtils;
 

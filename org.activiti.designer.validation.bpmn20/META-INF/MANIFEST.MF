@@ -20,3 +20,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .,
  jdi.jar,
  jdimodel.jar
+Import-Package: org.eclipse.ui.internal
