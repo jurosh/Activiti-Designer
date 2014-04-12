@@ -20,7 +20,7 @@ import org.eclipse.core.resources.IMarker;
  *  
  *  e3 / forbidden
  * 
- * @author Jurosh
+ * @author Juraj Husar (jurosh@jurosh.com)
  * 
  */
 public class Level2EndValidationWorker extends AbstractAdvancedValidatorWorker {

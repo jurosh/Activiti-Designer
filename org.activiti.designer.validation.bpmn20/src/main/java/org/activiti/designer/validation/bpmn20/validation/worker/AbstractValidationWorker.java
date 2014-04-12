@@ -88,9 +88,9 @@ public abstract class AbstractValidationWorker implements ProcessValidationWorke
 
   /**
    * Get nodes defined by class, Pool.class, Activity.class, etc.
+   * Returns exact class, not subclasses
    * 
-   * @param clas
-   *          class of node
+   * @param clas - class of node
    * @return
    */
   protected <T extends BaseElement> List<T> getNodes(Class<T> clas) {

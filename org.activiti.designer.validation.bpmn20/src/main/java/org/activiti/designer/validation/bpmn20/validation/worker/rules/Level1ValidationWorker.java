@@ -11,6 +11,7 @@ import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.bpmn.model.Process;
 import org.activiti.bpmn.model.SequenceFlow;
 import org.activiti.bpmn.model.StartEvent;
+import org.activiti.bpmn.model.SubProcess;
 import org.activiti.designer.validation.bpmn20.validation.util.BpmnMessageUtils;
 import org.activiti.designer.validation.bpmn20.validation.worker.AbstractAdvancedValidatorWorker;
 import org.eclipse.core.resources.IMarker;
@@ -18,11 +19,16 @@ import org.eclipse.core.resources.IMarker;
 /**
  * BPMN 2.0 Level 1 Palete Verification Rules
  * 
- * implemented
+ * Implemented:
  *  
- *  O1-1
- *  O1-3
- *  O1-4
+ *  O1
+ *  O2
+ *  O3
+ *  O4
+ *  
+ * Not implemented:
+ * 
+ *  O5
  * 
  * @author Jurosh
  * 
@@ -30,19 +36,21 @@ import org.eclipse.core.resources.IMarker;
 public class Level1ValidationWorker extends AbstractAdvancedValidatorWorker {
 
   private static final String MESSAGE_1A = "/O1/ %s should be connected to %s only with message flow.";
-  private static final String MESSAGE_1B = "/O2/ %s should be connected to %s only with message flow. Use message flow to connection between pools.";
+  private static final String MESSAGE_1B = "/O1/ %s should be connected to %s only with message flow. Use message flow to connection between pools.";
 
+  private static final String MESSAGE_2 = "/O2/ %s should have all sequence flows within its (subprocess) boundary. Sequence flow: %s.";
+  
   private static final String MESSAGE_3 = "/O3/ Message flow should cross 2 pools. Starts at element %s.";
 
   private static final String MESSAGE_4IO = "/O4/ %s have no incomming and outgoing sequence flow. ";
-  private static final String MESSAGE_4I = "/O5/ %s have no incomming sequence flow.";
-  private static final String MESSAGE_4O = "/O6/ %s don't have next element connection.";
+  private static final String MESSAGE_4I = "/O4/ %s have no incomming sequence flow.";
+  private static final String MESSAGE_4O = "/O4/ %s don't have next element connection.";
 
   @Override
   public void validate() {
 
     /**
-     * [O1-1] A sequence flow may not cross a pool (process) boundary.
+     * [O1] A sequence flow may not cross a pool (process) boundary.
      */
     List<SequenceFlow> allSequenceFlows = getNodes(SequenceFlow.class);
     for (SequenceFlow sequenceFlow : allSequenceFlows) {
@@ -72,12 +80,29 @@ public class Level1ValidationWorker extends AbstractAdvancedValidatorWorker {
     }
 
     /**
-     * [O1-2] A sequence flow may not cross a subprocess boundary.
+     * [O2] A sequence flow may not cross a subprocess boundary.
      */
-    // TODO implement O1-2
+    List<SubProcess> subprocesses = getNodes(SubProcess.class);
+    for (SubProcess subProcess : subprocesses) {
+      // there can't exist flow reaching outside world
+      for(FlowElement element : subProcess.getFlowElements()) {
+        if(element instanceof SequenceFlow) {
+          SequenceFlow flow = (SequenceFlow) element;
+          String targetRef = flow.getTargetRef();
+          BaseElement targetNode = getNode(targetRef);
+          
+          String idOfProcess = getIdOfProcess(targetNode);
+          String idOfSubProcess = getIdOfProcess(element);
+          
+          if(idOfProcess != null && !idOfProcess.equals(idOfSubProcess)) {
+            createErr(IMarker.SEVERITY_ERROR, String.format(MESSAGE_2, formatName(subProcess), flow), subProcess);
+          }
+        }
+      }
+    }
 
     /**
-     * [O1-3] A Message flow may not connect nodes in the same pool
+     * [O3] A Message flow may not connect nodes in the same pool
      * 
      * priority: MEDIUM [ not allowed by editor]
      */
@@ -114,7 +139,7 @@ public class Level1ValidationWorker extends AbstractAdvancedValidatorWorker {
     }
 
     /**
-     * [O1-4] A sequence flow may only be connect to an activity, gateway, or
+     * [O4] A sequence flow may only be connect to an activity, gateway, or
      * event, and both ends must be properly connected
      * 
      * priority: HIGH
@@ -153,11 +178,11 @@ public class Level1ValidationWorker extends AbstractAdvancedValidatorWorker {
     }
 
     /**
-     * [O1-5] A message flow may only connect to an activity, Message (or
+     * [O5] A message flow may only connect to an activity, Message (or
      * Multiple) event, or black-box pool, and both ends must be properly
      * connected.
      */
-    // TODO implement O1-5
+    // TODO bpmn20 rule implement O5
 
   }
 

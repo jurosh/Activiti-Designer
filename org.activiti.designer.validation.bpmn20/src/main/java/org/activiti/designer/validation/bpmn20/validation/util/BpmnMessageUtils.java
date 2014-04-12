@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.activiti.bpmn.model.BaseElement;
 import org.activiti.bpmn.model.EventDefinition;
+import org.activiti.bpmn.model.IntermediateCatchEvent;
 import org.activiti.bpmn.model.MessageEventDefinition;
 import org.activiti.bpmn.model.StartEvent;
 
 /**
  * Utils for message components
  * 
- * @author Jurosh
+ * @author Juraj Husar (jurosh@jurosh.com)
  *
  */
-public class BpmnMessageUtils {
+final public class BpmnMessageUtils {
 
   /*
   /**
@@ -49,9 +50,9 @@ public class BpmnMessageUtils {
     return false;
   }
   
-  /*
   public static boolean isEndMessage(BaseElement element) {
-    throw new RuntimeException("unimplemented");
-  }*/
+    // TODO check if catching message
+    return element instanceof IntermediateCatchEvent;
+  }
   
 }

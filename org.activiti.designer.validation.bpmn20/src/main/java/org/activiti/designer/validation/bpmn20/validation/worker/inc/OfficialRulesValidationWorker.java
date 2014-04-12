@@ -4,7 +4,9 @@ import org.activiti.designer.validation.bpmn20.validation.worker.AbstractValidat
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level1ValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2EndValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2GatewayValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2MessageFlowValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2PoolValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2SequenceFlowValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2StartValidationWorker;
 
@@ -42,7 +44,16 @@ public class OfficialRulesValidationWorker extends AbstractValidationWorker {
     ProcessValidationWorker endElementWorker = new Level2EndValidationWorker();
     results.addAll(endElementWorker.validate(diagram, nodes));
 
-    // TODO
+    // gateways [G]
+    ProcessValidationWorker gatewaysWorker = new Level2GatewayValidationWorker();
+    results.addAll(gatewaysWorker.validate(diagram, nodes));
+
+    // pools [P]
+    ProcessValidationWorker poolsWorker = new Level2PoolValidationWorker();
+    results.addAll(poolsWorker.validate(diagram, nodes));
+    
+    
+    // TODO all other..
 
   }
 
