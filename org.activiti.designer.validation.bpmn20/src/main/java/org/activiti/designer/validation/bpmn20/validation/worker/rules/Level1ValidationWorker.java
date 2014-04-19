@@ -89,12 +89,17 @@ public class Level1ValidationWorker extends AbstractAdvancedValidatorWorker {
         if(element instanceof SequenceFlow) {
           SequenceFlow flow = (SequenceFlow) element;
           String targetRef = flow.getTargetRef();
+          String sourceRef = flow.getSourceRef();
           BaseElement targetNode = getNode(targetRef);
+          BaseElement sourceNode = getNode(sourceRef);
           
-          String idOfProcess = getIdOfProcess(targetNode);
+          String idOfProcess1 = getIdOfProcess(targetNode);
+          String idOfProcess2 = getIdOfProcess(sourceNode);
+          
           String idOfSubProcess = getIdOfProcess(element);
           
-          if(idOfProcess != null && !idOfProcess.equals(idOfSubProcess)) {
+          if(idOfProcess1 != null && !idOfProcess1.equals(idOfSubProcess) 
+                  || idOfProcess2 != null && !idOfProcess2.equals(idOfSubProcess)) {
             createErr(IMarker.SEVERITY_ERROR, String.format(MESSAGE_2, formatName(subProcess), flow), subProcess);
           }
         }

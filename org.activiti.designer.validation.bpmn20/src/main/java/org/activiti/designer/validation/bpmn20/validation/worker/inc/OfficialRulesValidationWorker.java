@@ -3,6 +3,7 @@ package org.activiti.designer.validation.bpmn20.validation.worker.inc;
 import org.activiti.designer.validation.bpmn20.validation.worker.AbstractValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.ProcessValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level1ValidationWorker;
+import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2BoundaryValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2EndValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2GatewayValidationWorker;
 import org.activiti.designer.validation.bpmn20.validation.worker.rules.Level2MessageFlowValidationWorker;
@@ -51,6 +52,10 @@ public class OfficialRulesValidationWorker extends AbstractValidationWorker {
     // pools [P]
     ProcessValidationWorker poolsWorker = new Level2PoolValidationWorker();
     results.addAll(poolsWorker.validate(diagram, nodes));
+    
+    // boundary events [B]
+    ProcessValidationWorker boundaryEventWorker = new Level2BoundaryValidationWorker();
+    results.addAll(boundaryEventWorker.validate(diagram, nodes));
     
     
     // TODO all other..
